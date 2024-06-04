@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [data, setData] = useState(null);
+  const [code, setcode] = useState("#include<stdio.h>");
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/api/data')
+      .then(response => setData(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  const changeCode = (event)=>{
+    setcode(event.target.value);
+    console.log(code);
+  };
+
+  const submit = (e)=>{  
+    e.preventDefault();
+    axios.post("http://127.0.0.1:5000/submit/code",{
+      code : code
+    })
+    .then(res=>{
+      console.log(res.data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {data ? <p>{data.message}</p> : <p>Loading...</p>}
+      <form onSubmit={submit}>
+        <textarea value={code} onChange={changeCode}></textarea>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
