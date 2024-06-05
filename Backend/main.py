@@ -13,6 +13,7 @@ def get_data():
 @app.route('/submit/code', methods=['POST'])
 def submit_code():
     data = request.get_json()
+    print(data['code'])
     if 'code' not in data:
         return jsonify({"error": "No code field provided"}), 400
     
@@ -20,7 +21,9 @@ def submit_code():
     code_upper = code.upper()
     print("Received data:", code)
     print("Converted to uppercase:", code_upper)
-    cd(code_upper)
+    
+    return jsonify({"code": code_upper})
+
 
 
 

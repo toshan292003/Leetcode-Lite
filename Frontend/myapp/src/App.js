@@ -4,6 +4,7 @@ import axios from 'axios';
 function App() {
   const [data, setData] = useState(null);
   const [code, setcode] = useState("#include<stdio.h>\n\nusing namespace std;\n\nvoid main(){\n\tcout<<\"Hello\";\n}");
+  const [Code, setCode] = useState("");
 
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/data')
@@ -23,6 +24,7 @@ function App() {
     })
     .then(res=>{
       console.log(res.data);
+      setCode(res.data)
     })
     .catch((error)=>{
       console.log(error);
@@ -36,7 +38,7 @@ function App() {
         <textarea value={code} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p>{code}</p>
+      <p>{Code}</p>
     </div>
   );
 }
