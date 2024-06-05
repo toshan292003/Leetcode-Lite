@@ -33,9 +33,10 @@ function App() {
     <div>
       {data ? <p>{data.message}</p> : <p>Loading...</p>}
       <form onSubmit={submit}>
-        <textarea value={code} onChange={changeCode} rows="40" cols="100"></textarea>
+        <textarea value={code} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
+      <p>{code}</p>
     </div>
   );
 }
