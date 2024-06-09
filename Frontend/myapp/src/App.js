@@ -38,7 +38,7 @@ function App() {
         <textarea value={code} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p>{Code}</p>
+      <p>{code}</p>
     </div>
   );
 }

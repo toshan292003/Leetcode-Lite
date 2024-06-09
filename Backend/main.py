@@ -12,7 +12,7 @@ def get_data():
 @app.route('/submit/code', methods=['POST'])
 def submit_code():
     print("Received data.")
-    data = request.json
+    data = request.get_json()
     print(data)
     return jsonify({'message': 'Data received successfully'})
 
