@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [data, setData] = useState(null);
-  const [Code, setCode] = useState("#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid main(){\n\tcout<<\"Hello\";\n}");
+  const [code, setcode] = useState("#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid main(){\n\tcout<<\"Hello\";\n}");
 
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/data')
@@ -24,7 +24,7 @@ function App() {
     })
     .then(res=>{
       console.log(res.data);
-      setCode(res.data)
+      setcode(res.data)
     })
     .catch((error)=>{
       console.log(error);
