@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import subprocess
 
@@ -12,6 +12,8 @@ def get_data():
 @app.route('/submit/code', methods=['POST'])
 def submit_code():
     print("Received data.")
+    data = request.json
+    print(data)
     return jsonify({'message': 'Data received successfully'})
 
 
