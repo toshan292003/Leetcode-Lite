@@ -13,7 +13,8 @@ def get_data():
 def submit_code():
     print("Received data.")
     data = request.get_json()
-    print(data)
+    code = data['code']
+    print(code)
     return jsonify({'message': 'Data received successfully'})
 
 

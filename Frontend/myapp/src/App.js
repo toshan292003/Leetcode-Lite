@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [data, setData] = useState(null);
   const [code, setcode] = useState("#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid main(){\n\tcout<<\"Hello\";\n}");
+  const [response, setresponse] = useState("");
 
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/api/data')
@@ -20,11 +21,11 @@ function App() {
   const submit = (e)=>{  
     e.preventDefault();
     axios.post("http://127.0.0.1:5000/submit/code",{
-      code
+      code : code
     })
     .then(res=>{
       console.log(res.data);
-      setcode(res.data)
+      setresponse(res.data)
     })
     .catch((error)=>{
       console.log(error);
@@ -38,7 +39,7 @@ function App() {
         <textarea value={code} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p>{code}</p>
+      <p>{response.message}</p>
     </div>
   );
 }
