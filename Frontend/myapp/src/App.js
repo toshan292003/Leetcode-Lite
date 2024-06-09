@@ -20,7 +20,7 @@ function App() {
   const submit = (e)=>{  
     e.preventDefault();
     axios.post("http://127.0.0.1:5000/submit/code",{
-      code : code
+      code
     })
     .then(res=>{
       console.log(res.data);
