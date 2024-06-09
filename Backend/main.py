@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    return jsonify('message':"Hello from flask")
+    return jsonify({'message':"Hello from flask"})
 
 @app.route('/submit/code', methods=['POST'])
 def submit_code():
