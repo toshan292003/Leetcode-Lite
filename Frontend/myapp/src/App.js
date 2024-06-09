@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [data, setData] = useState(null);
-  const [code, setcode] = useState("#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid main(){\n\tcout<<\"Hello\";\n}");
+  const [code, setcode] = useState("#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n\tcout<<\"Hello\";\nreturn 0;}");
   const [response, setresponse] = useState("");
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
         <textarea value={code} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p>{response.message}</p>
+      <p>{response.result}</p>
     </div>
   );
 }
