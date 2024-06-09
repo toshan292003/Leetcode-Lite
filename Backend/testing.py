@@ -1,28 +1,6 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
 import subprocess
 import os
 import tempfile
-
-app = Flask(__name__)
-CORS(app)
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    data = {'message': 'Hello from Flask!'}
-    return jsonify(data)
-
-@app.route('/submit/code', methods=['POST'])
-def submit_code():
-    data = request.get_json()
-    print("Received data.")
-    print(data)
-    return jsonify({'message': {data}})
-
-
-
-
-
 
 def compile_and_run_cpp(cpp_code):
     # Create a temporary file to hold the C++ source code
@@ -55,6 +33,7 @@ def compile_and_run_cpp(cpp_code):
         return output
     except subprocess.CalledProcessError as e:
         print("Error during compilation or execution.")
+        print(e.stderr.decode())
         return None
     finally:
         # Clean up the temporary files
@@ -62,8 +41,10 @@ def compile_and_run_cpp(cpp_code):
         os.remove(temp_executable_file_name)
 
 
-
-
-
-if __name__ == '__main__':
-    app.run()
+code = """#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    cout<<"Hello";
+    return 0;
+}"""
+print(compile_and_run_cpp(code))
