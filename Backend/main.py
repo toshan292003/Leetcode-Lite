@@ -9,26 +9,27 @@ CORS(app)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    return jsonify({'message':"Hello from flask"})
+    return jsonify({'message':"Type code to return the square of a number"})
 
 @app.route('/submit/code', methods=['POST'])
 def submit_code():
     print("Received data.")
     data = request.get_json()
-    code = data['code']
+    data = data['code']
+    code = ""
+    code += data['declaration']
+    code += data['function']
+    code += data['main']
+    print(code)
+
     ans = compile_and_run_cpp(code)
-    final = ""
-    for letter in ans:
-        if(letter == ' '):
-            final += "\n"
-        else:
-            final += letter
-    print(final)
-    ans = final
-    if(ans == None):
-        ans = "Error in code"
-    result = {'result':ans}
-    return jsonify(result)
+    print(type(ans))
+    if(ans==None):
+        return jsonify({'result':'Error in code'})
+    elif(ans == 'Passed'):
+        return jsonify({'result': 'Right answer'})
+    else:
+        return jsonify({'result': 'Wrong answer'})
 
 
 
