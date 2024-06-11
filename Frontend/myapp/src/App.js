@@ -19,9 +19,9 @@ function App() {
     for(int i=0;i<50;i++){
       int res = square(a[i]);
         if(res != ans[i]){
-            cout<<"Test cases passed : "<<i<<endl;
-            cout<<"Given Input : "<<a[i]<<endl;
-            cout<<"Expected Output : "<<ans[i]<<endl;
+            cout<<"Test cases passed : "<<i<<" / ";
+            cout<<"Given Input : "<<a[i]<<" / ";
+            cout<<"Expected Output : "<<ans[i]<<" / ";
             cout<<"Your Output : "<<res;
             return 0;
         }

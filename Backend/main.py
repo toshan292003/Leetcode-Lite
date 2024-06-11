@@ -27,6 +27,7 @@ def submit_code():
     result = {
         'passed': False,
         'message': '',
+        'para' : '',
         'test_cases_passed' : 0,
         'given_input': '',
         'expected_output': '',
@@ -41,6 +42,8 @@ def submit_code():
     else:
         result['message'] = 'Wrong Answer'
         result['passed'] = False
+        sample = extract_values(ans)
+        print(sample)
         result['para'] = ans
 
     return jsonify(result)
@@ -87,11 +90,12 @@ def compile_and_run_cpp(cpp_code):
 
 
 
+
 def extract_values(result_string):
     test_cases_passed = int(re.search(r'Test cases passed\s*:\s*(\d+)', result_string).group(1))
-    given_input = re.search(r'Given Input\s*:\s*([^\\]+)', result_string).group(1).strip()
-    expected_output = re.search(r'Expected Output\s*:\s*([^\\]+)', result_string).group(1).strip()
-    your_output = re.search(r'Your Output\s*:\s*([^\\]+)', result_string).group(1).strip()
+    given_input = re.search(r'Given Input\s*:\s*([^/]+)', result_string).group(1).strip()
+    expected_output = re.search(r'Expected Output\s*:\s*([^/]+)', result_string).group(1).strip()
+    your_output = re.search(r'Your Output\s*:\s*([^/]+)', result_string).group(1).strip()
 
     return {
         'test_cases_passed': test_cases_passed,
@@ -99,7 +103,6 @@ def extract_values(result_string):
         'expected_output': expected_output,
         'your_output': your_output
     }
-
 
 
 
