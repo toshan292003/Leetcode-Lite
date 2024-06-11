@@ -70,7 +70,14 @@ function App() {
         <button type="submit">Submit</button>
       </form>
       <p>{response.message}</p>
-      <p>{response.para}</p>
+      {response.passed ? 
+      <div>
+        <p>{response.test_cases_passed}</p>
+        <p>{response.given_input}</p>
+        <p>{response.expected_output}</p>
+        <p>{response.your_output}</p>  
+      </div>
+       : null}
     </div>
   );
 }
