@@ -17,8 +17,12 @@ function App() {
     int ans[50] = {1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400,441,484,529,576,625,676,729,784,841,900,961,1024,1089,1156,1225,1296,1369,1444,1521,1600,1681,1764,1849,1936,2025,2116,2209,2304,2401,2500};
 
     for(int i=0;i<50;i++){
-        if(square(a[i]) != ans[i]){
-            cout<<"Failed";
+      int res = square(a[i]);
+        if(res != ans[i]){
+            cout<<"Test cases passed : "<<i<<endl;
+            cout<<"Given Input : "<<a[i]<<endl;
+            cout<<"Expected Output : "<<ans[i]<<endl;
+            cout<<"Your Output : "<<res;
             return 0;
         }
     }
@@ -51,6 +55,7 @@ function App() {
     .then(res=>{
       console.log(res.data);
       setresponse(res.data)
+      console.log(response)
     })
     .catch((error)=>{
       console.log(error);
@@ -64,7 +69,8 @@ function App() {
         <textarea value={code.function} onChange={changeCode} rows="20" cols="60"></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p>{response.result}</p>
+      <p>{response.message}</p>
+      <p>{response.para}</p>
     </div>
   );
 }

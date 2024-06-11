@@ -3,6 +3,7 @@ from flask_cors import CORS
 import subprocess
 import os
 import tempfile
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -20,17 +21,29 @@ def submit_code():
     code += data['declaration']
     code += data['function']
     code += data['main']
-    print(code)
 
     ans = compile_and_run_cpp(code)
-    print(type(ans))
+    print(ans)
+    result = {
+        'passed': False,
+        'message': '',
+        'test_cases_passed' : 0,
+        'given_input': '',
+        'expected_output': '',
+        'your_output': ''
+    }
     if(ans==None):
-        return jsonify({'result':'Error in code'})
+        result['message'] = 'Error in Compilation'
+        result['passed'] = False
     elif(ans == 'Passed'):
-        return jsonify({'result': 'Right answer'})
+        result['message'] = 'Right Answer'
+        result['passed'] = True
     else:
-        return jsonify({'result': 'Wrong answer'})
+        result['message'] = 'Wrong Answer'
+        result['passed'] = False
+        result['para'] = ans
 
+    return jsonify(result)
 
 
 
@@ -71,6 +84,23 @@ def compile_and_run_cpp(cpp_code):
         # Clean up the temporary files
         os.remove(temp_source_file_name)
         os.remove(temp_executable_file_name)
+
+
+
+def extract_values(result_string):
+    test_cases_passed = int(re.search(r'Test cases passed\s*:\s*(\d+)', result_string).group(1))
+    given_input = re.search(r'Given Input\s*:\s*([^\\]+)', result_string).group(1).strip()
+    expected_output = re.search(r'Expected Output\s*:\s*([^\\]+)', result_string).group(1).strip()
+    your_output = re.search(r'Your Output\s*:\s*([^\\]+)', result_string).group(1).strip()
+
+    return {
+        'test_cases_passed': test_cases_passed,
+        'given_input': given_input,
+        'expected_output': expected_output,
+        'your_output': your_output
+    }
+
+
 
 
 
