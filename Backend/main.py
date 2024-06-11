@@ -27,6 +27,7 @@ def submit_code():
     result = {
         'passed': False,
         'message': '',
+        'time' : 0,
         'para' : '',
         'test_cases_passed' : 0,
         'given_input': '',
@@ -39,6 +40,7 @@ def submit_code():
         result['passed'] = True
     elif(ans['success'] == 'Passed'):
         result['message'] = 'Right Answer'
+        result['time'] = ans['time']
         result['passed'] = True
     else:
         result['message'] = 'Wrong Answer'

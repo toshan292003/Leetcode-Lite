@@ -6,6 +6,7 @@ import "./solve.css";
 export default function Solve() {
 
     const [lvlcolor,setlvlcolor] = useState("#FFFFFF");
+    const [outcolor,setoutcolot] = useState("transparent");
     const [code, setcode] = useState({
     problem: "Square of a Number",
     level: "Easy",
@@ -79,6 +80,7 @@ export default function Solve() {
     }
 
     return () => {
+
     };
   });
 
@@ -134,9 +136,9 @@ export default function Solve() {
               </p>
             </section>
           ))}
-          <p>{response.message}</p>
+          <p style={{paddingBottom:"100px"}}>{response.message}</p>
           {!response.passed ? (
-            <section style={{paddingBottom:"100px"}}>
+            <section className="output">
               <p>Number of Test Cases Passed : {response.test_cases_passed}</p>
               <p>Given Input : {response.given_input}</p>
               <p>Expected Output : {response.expected_output}</p>
@@ -145,6 +147,7 @@ export default function Solve() {
           ) : null}
         </div>
         <div>
+        <small>Code Environment</small>
           <form>
             <textarea value={code.function} onChange={changeCode}></textarea>
           </form>
