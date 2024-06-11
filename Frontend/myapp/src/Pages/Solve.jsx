@@ -6,7 +6,7 @@ import "./solve.css";
 export default function Solve() {
 
     const [lvlcolor,setlvlcolor] = useState("#FFFFFF");
-    const [outcolor,setoutcolot] = useState("transparent");
+    const [outcolor,setoutcolot] = useState("white");
     const [code, setcode] = useState({
     problem: "Square of a Number",
     level: "Easy",
@@ -138,7 +138,7 @@ export default function Solve() {
           ))}
           <p style={{paddingBottom:"100px"}}>{response.message}</p>
           {!response.passed ? (
-            <section className="output">
+            <section className="output" style={{color:{outcolor}}}>
               <p>Number of Test Cases Passed : {response.test_cases_passed}</p>
               <p>Given Input : {response.given_input}</p>
               <p>Expected Output : {response.expected_output}</p>
