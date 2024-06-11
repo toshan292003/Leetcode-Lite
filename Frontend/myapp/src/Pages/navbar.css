@@ -1,0 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik+Mono+One&display=swap');
+
+.navbox{
+    position: fixed;
+    top: 0px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1.5% 0%;
+    background-color: transparent;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 1000;
+
+    background-color: #0F213F;
+}
+
+.navitems{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navitems ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style-type: none;
+    font-family: "Lexend", sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.navitems ul li{
+    position: relative;
+    bottom: 0px;
+    transition: all .5s ease;
+    opacity: 50%;
+}
+
+.navitems ul li a{
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+.navitems ul li:hover{
+    opacity: 100%;
+    bottom: 10px;
+}
+
+.navitems span{
+    font-size: 1.5rem;
+    font-family: "Rubik Mono One", monospace;
+    color: white;
+}

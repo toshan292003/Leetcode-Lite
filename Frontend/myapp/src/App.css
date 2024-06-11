@@ -3,13 +3,7 @@
   padding: 0px;
 }
 
-textarea{
-  background-color: black;
-  color: white;
-}
-
 body{
-  height: 100vh;
   background-color: black;
   color: white;
 }

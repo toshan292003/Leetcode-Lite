@@ -23,7 +23,6 @@ def submit_code():
     code += data['main']
 
     ans = compile_and_run_cpp(code)
-    print(ans)
     result = {
         'passed': False,
         'message': '',
@@ -33,22 +32,23 @@ def submit_code():
         'expected_output': '',
         'your_output': ''
     }
-    if(ans==None):
-        result['message'] = 'Error in Compilation'
-        result['passed'] = False
-    elif(ans == 'Passed'):
+    print(ans)
+    if(ans['success']=='CodeError'):
+        result['message'] = ans['message']
+        result['passed'] = True
+    elif(ans['success'] == 'Passed'):
         result['message'] = 'Right Answer'
         result['passed'] = True
     else:
         result['message'] = 'Wrong Answer'
         result['passed'] = False
-        sample = extract_values(ans)
+        sample = extract_values(ans['message'])
         result['test_cases_passed'] = sample['test_cases_passed']
         result['given_input'] = sample['given_input']
         result['expected_output'] = sample['expected_output']
         result['your_output'] = sample['your_output']
         result['para'] = ans
-
+    print(result)
     return jsonify(result)
 
 
@@ -64,6 +64,11 @@ def compile_and_run_cpp(cpp_code):
     temp_executable_file_name = temp_executable_file.name
     temp_executable_file.close()
     
+    ans = {
+        'success' : 'Wrong Answer',
+        'message' : ''
+    }
+
     try:
         # Compile the C++ code
         compile_result = subprocess.run(['g++', temp_source_file_name, '-o', temp_executable_file_name],
@@ -80,12 +85,17 @@ def compile_and_run_cpp(cpp_code):
                                     stderr=subprocess.PIPE)
         
         output = run_result.stdout.decode()
+        ans['success'] = 'Passed'
+        if(output != "Passed"):
+            ans['success'] = "Wrong Answer"
+        ans['message'] = output
         print("Execution successful.")
-        return output
+        return ans
     except subprocess.CalledProcessError as e:
         print("Error during compilation or execution.")
-        print(e.stderr.decode())
-        return None
+        ans['success'] = 'CodeError'
+        ans['message'] = e.stderr.decode()
+        return ans
     finally:
         # Clean up the temporary files
         os.remove(temp_source_file_name)
