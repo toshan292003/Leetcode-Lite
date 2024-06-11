@@ -24,8 +24,8 @@
 
     padding: 20px;
     height: 750px;
-    overflow: scroll;
-    scroll-behavior: smooth;
+    overflow: auto;
+    sc
 
     display: flex;
     flex-direction: column;
