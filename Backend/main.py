@@ -4,6 +4,7 @@ import subprocess
 import os
 import tempfile
 import re
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -66,11 +67,13 @@ def compile_and_run_cpp(cpp_code):
     
     ans = {
         'success' : 'Wrong Answer',
-        'message' : ''
+        'message' : '',
+        'time' : 0
     }
 
     try:
         # Compile the C++ code
+        start_time = time.time()
         compile_result = subprocess.run(['g++', temp_source_file_name, '-o', temp_executable_file_name],
                                         check=True,
                                         stdout=subprocess.PIPE,
@@ -89,6 +92,10 @@ def compile_and_run_cpp(cpp_code):
         if(output != "Passed"):
             ans['success'] = "Wrong Answer"
         ans['message'] = output
+
+        end_time = time.time()
+        execution_time = (end_time - start_time)*1000
+        ans['time'] = execution_time
         print("Execution successful.")
         return ans
     except subprocess.CalledProcessError as e:
