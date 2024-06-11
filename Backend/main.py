@@ -43,7 +43,10 @@ def submit_code():
         result['message'] = 'Wrong Answer'
         result['passed'] = False
         sample = extract_values(ans)
-        print(sample)
+        result['test_cases_passed'] = sample['test_cases_passed']
+        result['given_input'] = sample['given_input']
+        result['expected_output'] = sample['expected_output']
+        result['your_output'] = sample['your_output']
         result['para'] = ans
 
     return jsonify(result)
