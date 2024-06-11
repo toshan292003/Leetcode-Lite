@@ -72,10 +72,10 @@ function App() {
       <p>{response.message}</p>
       {!response.passed ? 
       <div>
-        <p>{response.test_cases_passed}</p>
-        <p>{response.given_input}</p>
-        <p>{response.expected_output}</p>
-        <p>{response.your_output}</p>  
+        <p>Number of Test Cases Passed : {response.test_cases_passed}</p>
+        <p>Given Input : {response.given_input}</p>
+        <p>Expected Output : {response.expected_output}</p>
+        <p>Your Output : {response.your_output}</p>  
       </div>
        : null}
     </div>
