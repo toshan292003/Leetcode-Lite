@@ -70,7 +70,7 @@ function App() {
         <button type="submit">Submit</button>
       </form>
       <p>{response.message}</p>
-      {response.passed ? 
+      {!response.passed ? 
       <div>
         <p>{response.test_cases_passed}</p>
         <p>{response.given_input}</p>
