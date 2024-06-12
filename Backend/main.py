@@ -96,7 +96,7 @@ def compile_and_run_cpp(cpp_code):
         ans['message'] = output
 
         end_time = time.time()
-        execution_time = (end_time - start_time)*1000
+        execution_time = (end_time - start_time)
         ans['time'] = execution_time
         print("Execution successful.")
         return ans

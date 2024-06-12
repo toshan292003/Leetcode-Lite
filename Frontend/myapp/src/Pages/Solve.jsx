@@ -5,9 +5,12 @@ import "./solve.css";
 
 export default function Solve() {
 
-    const [lvlcolor,setlvlcolor] = useState("#FFFFFF");
-    const [outcolor,setoutcolot] = useState("white");
-    const [code, setcode] = useState({
+  const [lvlcolor, setlvlcolor] = useState("#FFFFFF");
+  const [outcolor, setoutcolor] = useState({
+    text: "white",
+    back: "#545454"
+  });
+  const [code, setcode] = useState({
     problem: "Square of a Number",
     level: "Easy",
     description: {
@@ -69,14 +72,14 @@ export default function Solve() {
   });
 
   useEffect(() => {
-    if(code.level.toLocaleLowerCase() == "easy"){
-        setlvlcolor("#46C6A9");
+    if (code.level.toLocaleLowerCase() == "easy") {
+      setlvlcolor("#46C6A9");
     }
-    else if(code.level.toLocaleLowerCase() == "medium"){
-        setlvlcolor("#FFA115");
+    else if (code.level.toLocaleLowerCase() == "medium") {
+      setlvlcolor("#FFA115");
     }
-    else if(code.level.toLocaleLowerCase() == "hard"){
-        setlvlcolor("#f5334a");
+    else if (code.level.toLocaleLowerCase() == "hard") {
+      setlvlcolor("#f5334a");
     }
 
     return () => {
@@ -101,7 +104,32 @@ export default function Solve() {
       .then((res) => {
         console.log(res.data);
         setresponse(res.data);
-        console.log(response);
+        console.log(res.data.message);
+        if (res.data.message === "Right Answer") {
+          console.log("Entered Statement Right answer");
+          setoutcolor({
+            text: "#0fd149",
+            back: "#2d382f"
+          });
+          console.log(outcolor);
+        }
+        else if (res.data.message === "Wrong Answer") {
+          console.log("Entered Statement Wrong answer");
+          setoutcolor({
+            text: "#FFFFFF",
+            back: "#3d2f23"
+          });
+          console.log(outcolor);
+        }
+        else {
+          console.log("Entered Statement Error in code");
+          setoutcolor({
+            text: "#f2001c",
+            back: "#3b2023"
+          });
+          console.log(outcolor);
+        }
+
       })
       .catch((error) => {
         console.log(error);
@@ -113,7 +141,7 @@ export default function Solve() {
         <div>
           <small>Problem Description</small>
           <h1>{code.problem}</h1>
-          <h4 style={{color:lvlcolor}}>{code.level}</h4>
+          <h4 style={{ color: lvlcolor }}>{code.level}</h4>
           <ul>
             {code.description.PS.map((value, index) => (
               <li key={index}>{value}</li>
@@ -136,18 +164,26 @@ export default function Solve() {
               </p>
             </section>
           ))}
-          <p style={{paddingBottom:"100px"}}>{response.message}</p>
+          <p style={{ color: outcolor.text, backgroundColor: outcolor.back , borderColor:outcolor.text}} className="result">{response.message}</p>
+
+          {response.passed ? (
+            <section className="output" style={{ backgroundColor: outcolor.back , borderColor:outcolor.text}}>
+              <p style={{ color: outcolor.text }}>Time Elapsed : {response.time} ms</p>
+            </section>
+          ) : null}
+
           {!response.passed ? (
-            <section className="output" style={{color:{outcolor}}}>
+            <section className="output" style={{ backgroundColor: outcolor.back }}>
               <p>Number of Test Cases Passed : {response.test_cases_passed}</p>
               <p>Given Input : {response.given_input}</p>
               <p>Expected Output : {response.expected_output}</p>
               <p>Your Output : {response.your_output}</p>
             </section>
           ) : null}
+          <p style={{ paddingBottom: "200px" }}></p>
         </div>
         <div>
-        <small>Code Environment</small>
+          <small>Code Environment</small>
           <form>
             <textarea value={code.function} onChange={changeCode}></textarea>
           </form>

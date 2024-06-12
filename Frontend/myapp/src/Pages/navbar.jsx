@@ -28,10 +28,10 @@ export default function Navbar() {
               <a href="/">Home</a>
             </li>
             <li>
-              <a href="/">Tests</a>
+              <a href="/">Problems</a>
             </li>
             <li>
-              <a href="/input">Inputs</a>
+              <a href="/input">Practice</a>
             </li>
             <li>
               <a href="/about">About Us</a>
