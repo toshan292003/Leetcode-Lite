@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "./solve.css";
 
-export default function Solve() {
+export default function Solve(props) {
 
   const [lvlcolor, setlvlcolor] = useState("#FFFFFF");
   const [outcolor, setoutcolor] = useState({
@@ -59,7 +59,7 @@ export default function Solve() {
 
     cout<<"Passed";
     return 0;
-}`,
+}`
   });
   const [response, setresponse] = useState({
     passed: true,

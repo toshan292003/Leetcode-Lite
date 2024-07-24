@@ -4,6 +4,7 @@ import "./App.css";
 
 import Solve from './Pages/Solve';
 import Navbar from './Pages/navbar';
+import Problems from './Pages/Problems';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
-          <Route path = "/" element = {<Solve/>}/>
+          <Route path = "/solve" element = {<Solve/>}/>
+          <Route path = "/problems" element = {<Problems/>}/>
         </Routes>
       </BrowserRouter>
      </>
